@@ -1,4 +1,7 @@
 function love.load()
+    local font=love.graphics.newFont("font.ttf",20)
+    love.graphics.setFont(font)
+
     grid={
         tileWidth=20,
         tileHeight=20
@@ -15,11 +18,22 @@ function love.load()
 
     apple=require("apple")
     apple:init()
+
+    gameover=false
 end
 
 function love.update(dt)
-    snake:update(dt)
-    apple:update(dt)
+    if not gameover then
+        snake:update(dt)
+        apple:update(dt)
+    else
+        if love.keyboard.isDown("return") then
+            snake:init()
+            apple:init()
+            score=0
+            gameover=false
+        end
+    end
 end
 
 function love.draw()
@@ -31,6 +45,18 @@ function love.draw()
     end
     snake:draw()
     apple:draw()
+
+    if gameover then
+        local w,h=love.graphics.getDimensions()
+
+        love.graphics.setColor(0,0,0,0.5)
+        love.graphics.rectangle("fill",0,0,w,h)
+
+        love.graphics.setColor(1,1,1,1)
+        local text="Game Over! Press enter to try again."
+        local font=love.graphics.getFont()
+        love.graphics.print(text,w/2-font:getWidth(text)/2,h/2-font:getHeight()/2)
+    end
 
     love.graphics.setColor(1,1,1,1)
     love.graphics.print("Score: "..score,5,5)

@@ -11,6 +11,8 @@ function apple:update(dt)
         self.y=math.random(0,grid.height-1)
         snake.length=snake.length+1
         score=score+1
+        snake.speed=snake.speed*0.9
+        snake.speed=math.max(snake.speed,0.05)
     end
 end
 

@@ -5,7 +5,7 @@ function snake:init()
     self.tail={}
     self.length = 6
 
-    self.speed = 0.1
+    self.speed = 0.5
     self.time = 0
     self.direction=1
 end
@@ -43,16 +43,22 @@ function snake:update(dt)
             self.head.x=grid.width-1
         end
     end
+
+    for k,v in pairs(self.tail) do
+        if v.x==self.head.x and v.y==self.head.y then
+            gameover=true
+        end
+    end
 end
 
 function snake:draw()
-    love.graphics.setColor(0.4, 1, 0.1)
-    love.graphics.rectangle("fill", self.head.x * grid.tileWidth, self.head.y * grid.tileHeight, grid.tileWidth, grid.tileHeight)
-
-    love.graphics.setColor(0.3, 0.8, 0.2)
     for k,v in pairs(self.tail) do
+        love.graphics.setColor(0.3, 0.8, 0.2)
         love.graphics.rectangle("fill", v.x * grid.tileWidth, v.y * grid.tileHeight, grid.tileWidth, grid.tileHeight)
     end
+
+    love.graphics.setColor(0.4, 1, 0.1)
+    love.graphics.rectangle("fill", self.head.x * grid.tileWidth, self.head.y * grid.tileHeight, grid.tileWidth, grid.tileHeight)
 end
 
 function snake:key(key)
