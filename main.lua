@@ -25,3 +25,7 @@ function love.draw()
     end
     snake:draw()
 end
+
+function love.keypressed(key)
+    snake:key(key)
+end
