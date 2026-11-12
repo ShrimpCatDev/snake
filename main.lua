@@ -7,10 +7,13 @@ function love.load()
     local w,h=love.graphics.getDimensions()
     grid.width=w/grid.tileWidth
     grid.height=h/grid.tileHeight
+
+    snake=require("snake")
+    snake:init()
 end
 
 function love.update(dt)
-
+    snake:update(dt)
 end
 
 function love.draw()
@@ -20,4 +23,5 @@ function love.draw()
             love.graphics.rectangle("line",x*grid.tileWidth,y*grid.tileHeight,grid.tileWidth,grid.tileHeight)
         end
     end
+    snake:draw()
 end
