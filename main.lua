@@ -8,12 +8,18 @@ function love.load()
     grid.width=w/grid.tileWidth
     grid.height=h/grid.tileHeight
 
+    score=0
+
     snake=require("snake")
     snake:init()
+
+    apple=require("apple")
+    apple:init()
 end
 
 function love.update(dt)
     snake:update(dt)
+    apple:update(dt)
 end
 
 function love.draw()
@@ -24,6 +30,10 @@ function love.draw()
         end
     end
     snake:draw()
+    apple:draw()
+
+    love.graphics.setColor(1,1,1,1)
+    love.graphics.print("Score: "..score,5,5)
 end
 
 function love.keypressed(key)

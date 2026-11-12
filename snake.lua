@@ -1,7 +1,7 @@
 local snake={}
 
 function snake:init()
-    self.head = {x=0, y=0}
+    self.head = {x=grid.width/2, y=grid.height/2}
     self.tail={}
     self.length = 6
 
